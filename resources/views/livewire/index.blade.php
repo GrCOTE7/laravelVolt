@@ -2,17 +2,15 @@
 
 use Livewire\Volt\Component;
 
-$v = new #[Title('Home')]
- class extends Component {
-
-    public $title='oki';
-    //
-// #[Layout('components.layout.empty')]
+$v = new
+#[Title('Home')]
+class extends Component {
+    
 }; ?>
 
 <div>
-    Hi
-     {{-- {{ $this->v() }} --}}
+    @lang('Hi')
+    {{-- {{ $this->v() }} --}}
     <hr>
     {{ var_dump($users ?? 'no') }}
     <hr>
