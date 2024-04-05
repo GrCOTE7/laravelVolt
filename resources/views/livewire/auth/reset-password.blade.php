@@ -1,20 +1,21 @@
 <?php
-
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
-use Livewire\Attributes\Layout;
 use Livewire\Attributes\Locked;
 use Livewire\Volt\Component;
 
 $v = new class extends Component {
     #[Locked]
     public string $token = '';
+
     public string $email = '';
+
     public string $password = '';
+
     public string $password_confirmation = '';
 
     public function mount(string $token): void
@@ -43,7 +44,7 @@ $v = new class extends Component {
             event(new PasswordReset($user));
         });
 
-        if ($status != Password::PASSWORD_RESET) {
+        if (Password::PASSWORD_RESET != $status) {
             $this->addError('email', __($status));
 
             return;

@@ -5,7 +5,7 @@ use Livewire\Volt\Component;
 $v = new
 #[Title('Home')]
 class extends Component {
-    
+
 }; ?>
 
 <div>
