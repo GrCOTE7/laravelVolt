@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Volt::route('/', 'index')->name('home');
-Volt::route('/index2', 'index2')->name('index2');
+Volt::route('/myIndex', 'my_index')->name('myIndex');
 Volt::route('/users', 'users.index')->name('users');
 
 Route::middleware('guest')->group(function () {

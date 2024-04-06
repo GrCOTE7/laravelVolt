@@ -1,5 +1,5 @@
 @php
-    $routes = ['/' => 'home', 'index2' => 'index2', 'users' => 'users'];
+    $routes = ['/' => 'home', 'myIndex' => 'myIndex', 'users' => 'users'];
     $currentRoute = Route::currentRouteName();
     $lks = [];
     foreach ($routes as $url => $route) {
