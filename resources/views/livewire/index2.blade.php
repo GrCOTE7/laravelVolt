@@ -33,10 +33,13 @@ class extends Component {
 <div>
     <a href="/" class="link">Home</a> |
     <a href="/users" class="link">Users</a>
-    <hr>
+
+    <br><br><hr><br>
+
     @lang('Hi'), {{ $this->getCurrentUserName() ?? 'l\'ami' }} !
-    {{-- {{ $this->v() }} --}}
-    <hr><br>
+
+    <br><br><hr><br>
+
     <x-card>
         <x-table :headers="$headers" :rows="$users" />
     </x-card>
