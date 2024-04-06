@@ -15,9 +15,9 @@ $v = new class extends Component {
 <div>
     <x-menu activate-by-route>
 
+        <x-menu-separator />
         {{-- User --}}
         @if ($user = auth()->user())
-            <x-menu-separator />
             <x-list-item :item="$user" value="name" sub-value="email" no-separator no-hover
                 class="-mx-2 !-my-2 rounded">
                 <x-slot:actions>
@@ -26,9 +26,15 @@ $v = new class extends Component {
                 </x-slot:actions>
             </x-list-item>
             <x-menu-separator />
-        @else
+            @else
             <x-menu-item title="{{ __('Login') }}" icon="o-user" link="{{ route('login') }}" />
-        @endif
+            @endif
+
+            <x-menu-sub title="{{__('Images')}}" icon="o-photo">
+                <x-menu-item title="{{__('Add image')}}" icon="o-plus" link="{{ route('images.create') }}" />
+            </x-menu-sub>
+
+            <x-menu-separator />
 
         <x-menu-item title="Hello" icon="o-sparkles" link="/" />
         <x-menu-sub title="Settings" icon="o-cog-6-tooth">
