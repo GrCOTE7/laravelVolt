@@ -31,10 +31,7 @@ class extends Component {
 }; ?>
 
 <div>
-    <a href="/" class="link">Home</a> |
-    <a href="/users" class="link">Users</a>
-
-    <br><br><hr><br>
+    <x-partials.nav2 />
 
     @lang('Hi'), {{ $this->getCurrentUserName() ?? 'l\'ami' }} !
 
