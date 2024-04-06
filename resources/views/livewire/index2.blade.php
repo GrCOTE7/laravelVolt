@@ -1,23 +1,43 @@
 <?php
 
 use App\Models\User;
-use function Livewire\Volt\{state};
+use Livewire\Volt\Component;
+use Illuminate\Support\Collection;
+use Mary\Traits\Toast;
 
-// public function Users (){
+$v = new
+#[Title('Home')]
+class extends Component {
+    public function getCurrentUserName(): string|null
+    {
+        return auth()->user()->name ?? null;
+    }
+    // Table headers
+    public function headers(): array
+    {
+        return [['key' => 'id', 'label' => '#', 'class' => 'w-1'], ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'], ['key' => 'admin', 'label' => 'Admin', 'class' => 'w-20'], ['key' => 'email', 'label' => 'E-mail', 'sortable' => false]];
+    }
+    public function users():Collection {
+        return User::all();
+    }
 
-// }
-
-$users = User::all();
-
-// return $users;
-
-?>
+    public function with(): array
+    {
+        return [
+            'users' => $this->users(),
+            'headers' => $this->headers(),
+        ];
+    }
+}; ?>
 
 <div>
-    Hi2
-    <hr>
-    {{ var_dump($users ?? 'no') }}
-    <hr>
-    <a href="/" class="link">index</a> |
+    <a href="/" class="link">Home</a> |
     <a href="/users" class="link">Users</a>
+    <hr>
+    @lang('Hi'), {{ $this->getCurrentUserName() ?? 'l\'ami' }} !
+    {{-- {{ $this->v() }} --}}
+    <hr><br>
+    <x-card>
+        <x-table :headers="$headers" :rows="$users" />
+    </x-card>
 </div>
