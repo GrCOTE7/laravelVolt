@@ -1,9 +1,4 @@
 <?php
-
-/**
- * (ɔ) GrCOTE7 - 1990-2024
- */
-
 namespace Database\Seeders;
 
 use App\Models\Category;
