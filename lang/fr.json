@@ -239,8 +239,10 @@
     "Image added with success.": "L'image a bien été ajoutée",
     "All categories": "Toutes les catégories",
     "Categories": "Catégories",
+    "Edit photo": "Modifier cette photo",
+    "Manage Photo": "Modification de la photo",
+    "Photo changed with success.":"La photo a bien été modifiée",
     "Delete this photo": "Supprimer cette photo",
     "Are you sure to delete this photo?": "Voulez-vous supprimer cette photo ?",
-    "Edit photo": "Modifier cette photo",
     "Photo deleted with success.": "La photo a bien été supprimée"
 }

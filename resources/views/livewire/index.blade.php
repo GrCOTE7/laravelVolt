@@ -1,17 +1,30 @@
 <?php
 
+use App\Models\Image;
 use Mary\Traits\Toast;
 use App\Models\Category;
 use Livewire\Volt\Component;
+use Livewire\Attributes\Rule;
 use App\Repositories\ImageRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 $v = new class extends Component {
-
     use Toast;
 
+    public Image $image;
     public string $category;
     public string $param;
+
+    #[Rule('required|exists:categories,id')]
+    public string $category_id = '';
+
+    #[Rule('nullable|string|max:255')]
+    public $description = '';
+
+    #[Rule('boolean')]
+    public bool $adult = false;
+
+    public bool $imageModal = false;
 
     public function mount($category, $param = ''): void
     {
@@ -31,11 +44,29 @@ $v = new class extends Component {
         redirect()->route('home', ['category' => $this->category, 'param' => $id]);
     }
 
+    public function editImage(ImageRepository $imageRepository, int $id): void
+    {
+        $this->image = $imageRepository->getImage($id);
+        $this->description = $this->image->description;
+        $this->category_id = $this->image->category_id;
+        $this->adult = $this->image->adult;
+
+        $this->imageModal = true;
+    }
+
+    public function saveImage(ImageRepository $imageRepository): void
+    {
+        $data = $this->validate();
+        $imageRepository->saveImage($this->image, $data);
+        $this->success(__('Photo changed with success.'));
+        $this->imageModal = false;
+    }
+
     public function deleteImage(ImageRepository $imageRepository, int $id): void
-{
-    $imageRepository->deleteImage($id);
-    $this->success(__('Photo deleted with success.'), redirectTo: '/');
-}
+    {
+        $imageRepository->deleteImage($id);
+        $this->success(__('Photo deleted with success.'), redirectTo: '/');
+    }
 
     public function with(): array
     {
@@ -49,6 +80,22 @@ $v = new class extends Component {
 <div>
     <x-partials.nav2 />
     <div class="relative items-center grid w-full px-5 py-5 mx-auto md:px-12 max-w-7xl">
+
+        <x-modal wire:model="imageModal" title="{{ __('Manage Photo') }}" separator>
+            <x-form wire:submit="saveImage">
+                <x-input label="{{ __('Description') }}" value="{{ $description }}" wire:model="description"
+                    hint="{{ __('Describe your image here') }}" />
+                <x-select label="{{ __('Category') }}" icon="o-tag" :options="$categories" wire:model="category_id"
+                    hint="{{ __('Choose a pertinent category') }}" />
+                <x-checkbox label="{{ __('Adult content') }}" wire:model="adult" />
+                <x-slot:actions>
+                    <x-button label="{{ __('Cancel') }}" icon="o-x-mark" class="btn-ghost"
+                        @click="$wire.imageModal = false" />
+                    <x-button label="{{ __('Save') }}" type="submit" icon="o-check" class="btn-primary" />
+                </x-slot:actions>
+            </x-form>
+        </x-modal>
+
         <div class="mb-4">{{ $images->links() }}</div>
         <div class="grid w-full grid-cols-1 gap-6 mx-auto sm:grid-cols-2 lg:grid-cols-3 gallery">
             @foreach ($images as $image)

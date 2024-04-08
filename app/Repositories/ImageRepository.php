@@ -7,9 +7,9 @@
 namespace App\Repositories;
 
 use App\Models\Image;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ImageRepository
 {
@@ -36,14 +36,23 @@ class ImageRepository
 		return $query->paginate($user->pagination ?? config('app.pagination'));
 	}
 
-    public function deleteImage(int $id): void
-    {
-        $image = Image::find($id);
-        Storage::disk('public')->delete ([
-            'images/' . $image->name,
-            'thumbs/' . $image->name,
-        ]);
-        $image->delete();
-    }
+	public function getImage(int $id)
+	{
+		return Image::find($id);
+	}
 
+	public function saveImage(Image $image, array $data): void
+	{
+		$image->update($data);
+	}
+
+	public function deleteImage(int $id): void
+	{
+		$image = Image::find($id);
+		Storage::disk('public')->delete([
+			'images/' . $image->name,
+			'thumbs/' . $image->name,
+		]);
+		$image->delete();
+	}
 }
