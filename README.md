@@ -2,6 +2,15 @@
 
 ---
 
+Rappels:
+Pour créer un symlink entre le dossier storage/app/public et le dossier public/storage, on va utiliser cette commande :
+
+php artisan storage:link
+
+Cette commande crée un lien symbolique permettant d’accéder aux fichiers dans storage/app/public à travers public/storage. On va créer avec notre application un dossier images pour les photos originales et thumbs pour les versions réduites.
+
+---
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
