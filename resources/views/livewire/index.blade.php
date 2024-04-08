@@ -46,7 +46,7 @@ $v = new class extends Component {
                     <div class="flex justify-between">
                         <p wire:click="userImages({{ $image->user->id }})" class="text-left" style="cursor: pointer;">
                             {{ $image->user->name }}</p>
-                        <p class="text-right"><em>{{ $image->created_at->isoFormat('LL') }}</em></p>
+                        <p class="text-right"><em>{{ $image->created_at->isoFormat('LLLL') }}</em></p>
                     </div>
                     <x-slot:figure>
                         <a href="{{ asset('storage/images/' . $image->name) }}">

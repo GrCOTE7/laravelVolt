@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Livewire\Volt\Component;
 
 $v = new class extends Component {
@@ -9,6 +10,12 @@ $v = new class extends Component {
         Session::invalidate();
         Session::regenerateToken();
         $this->redirect('/');
+    }
+    public function with(): array
+    {
+        return [
+            'categories' => Category::get(),
+        ];
     }
 }; ?>
 
@@ -26,15 +33,23 @@ $v = new class extends Component {
                 </x-slot:actions>
             </x-list-item>
             <x-menu-separator />
-            @else
+        @else
             <x-menu-item title="{{ __('Login') }}" icon="o-user" link="{{ route('login') }}" />
-            @endif
+        @endif
 
+        <x-menu-sub title="{{__('Categories')}}" icon="o-book-open">
+            <x-menu-item title="{{ __('All categories') }}" link="{{ route('home', ['category' => 'all']) }}" />
+            @foreach($categories as $category)
+                <x-menu-item title="{{ $category->name }}" link="{{ route('home', ['category' => $category->slug]) }}" />
+            @endforeach
+        </x-menu-sub>
+        @auth
             <x-menu-sub title="{{__('Images')}}" icon="o-photo">
                 <x-menu-item title="{{__('Add image')}}" icon="o-plus" link="{{ route('images.create') }}" />
             </x-menu-sub>
+        @endauth
 
-            <x-menu-separator />
+        <x-menu-separator />
 
         <x-menu-item title="Hello" icon="o-sparkles" link="/" />
         <x-menu-sub title="Settings" icon="o-cog-6-tooth">
