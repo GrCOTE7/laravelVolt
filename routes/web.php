@@ -7,11 +7,6 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-// Volt::route('/', 'index')->name('home');
-Route::get('/', function () {
-	return redirect()->route('home', ['category' => 'all']);
-});
-
 Volt::route('/myIndex', 'my_index')->name('myIndex');
 Volt::route('/users', 'users.index')->name('users');
 
@@ -26,7 +21,12 @@ Route::middleware('auth')->group(function () {
 	Volt::route('images/create', 'images.create')->name('images.create');
 	Volt::route('albums', 'albums.index')->name('albums.index');
 	Volt::route('albums/create', 'albums.create')->name('albums.create');
-    Volt::route('albums/{album}/edit', 'albums.edit')->name('albums.edit');
+	Volt::route('albums/{album}/edit', 'albums.edit')->name('albums.edit');
+});
+
+// Volt::route('/', 'index')->name('home');
+Route::get('/', function () {
+	return redirect()->route('home', ['category' => 'all']);
 });
 
 Volt::route('/{category}/{param?}', 'index')->name('home');

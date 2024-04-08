@@ -26,10 +26,14 @@ $v = new class extends Component {
 
     public bool $imageModal = false;
 
+    public $albums;
+    public array $albums_multi_ids = [];
+
     public function mount($category, $param = ''): void
     {
         $this->category = $category;
         $this->param = $param;
+        $this->albums = Auth::user() ? Auth::user()->albums()->get() : null;
     }
 
     public function images(): LengthAwarePaginator
@@ -46,10 +50,12 @@ $v = new class extends Component {
 
     public function editImage(ImageRepository $imageRepository, int $id): void
     {
-        $this->image = $imageRepository->getImage($id);
+        $this->image = $imageRepository->getImageWithAlbums($id);
+
         $this->description = $this->image->description;
         $this->category_id = $this->image->category_id;
         $this->adult = $this->image->adult;
+        $this->albums_multi_ids = $this->image->albums->pluck('id')->toArray();
 
         $this->imageModal = true;
     }
@@ -57,8 +63,11 @@ $v = new class extends Component {
     public function saveImage(ImageRepository $imageRepository): void
     {
         $data = $this->validate();
-        $imageRepository->saveImage($this->image, $data);
+
+        $imageRepository->saveImage($this->image, $data, $this->albums_multi_ids);
+
         $this->success(__('Photo changed with success.'));
+
         $this->imageModal = false;
     }
 
@@ -84,9 +93,12 @@ $v = new class extends Component {
         <x-modal wire:model="imageModal" title="{{ __('Manage Photo') }}" separator>
             <x-form wire:submit="saveImage">
                 <x-input label="{{ __('Description') }}" value="{{ $description }}" wire:model="description"
-                    hint="{{ __('Describe your image here') }}" />
+                    hint="{{ __('Describre your image here') }}" />
                 <x-select label="{{ __('Category') }}" icon="o-tag" :options="$categories" wire:model="category_id"
                     hint="{{ __('Choose a pertinent category') }}" />
+                @if ($albums)
+                    <x-choices label="{{ __('Albums') }}" wire:model="albums_multi_ids" :options="$albums" />
+                @endif
                 <x-checkbox label="{{ __('Adult content') }}" wire:model="adult" />
                 <x-slot:actions>
                     <x-button label="{{ __('Cancel') }}" icon="o-x-mark" class="btn-ghost"
@@ -103,7 +115,7 @@ $v = new class extends Component {
                     <div class="flex justify-between">
                         <p wire:click="userImages({{ $image->user->id }})" class="text-left" style="cursor: pointer;">
                             {{ $image->user->name }}</p>
-                        <p class="text-right"><em>{{ $image->created_at->isoFormat('LLLL') }}</em></p>
+                        <p class="text-right"><em>{{ ucfirst($image->created_at->isoFormat('LLLL')) }}</em></p>
                     </div>
 
                     @adminOrOwner($image->user_id)

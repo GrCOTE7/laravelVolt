@@ -23,14 +23,19 @@ class ImageRepository
 			$query->whereAdult(false);
 		}
 
-		if ('' != $param) {
-			$query->whereUserId($param);
-		}
-
-		if ('all' != $category) {
-			$query->whereHas('category', function ($query) use ($category) {
-				$query->whereSlug($category);
+		if ('album' == $category) {
+			$query->whereHas('albums', function ($query) use ($param) {
+				$query->whereSlug($param);
 			});
+		} else {
+			if ('' != $param) {
+				$query->whereUserId($param);
+			}
+			if ('all' != $category) {
+				$query->whereHas('category', function ($query) use ($category) {
+					$query->whereSlug($category);
+				});
+			}
 		}
 
 		return $query->paginate($user->pagination ?? config('app.pagination'));
@@ -41,9 +46,15 @@ class ImageRepository
 		return Image::find($id);
 	}
 
-	public function saveImage(Image $image, array $data): void
+	public function getImageWithAlbums(int $id): Image
+	{
+		return Image::with('albums')->find($id);
+	}
+
+	public function saveImage(Image $image, array $data, array $albums_multi_ids): void
 	{
 		$image->update($data);
+		$image->albums()->sync($albums_multi_ids);
 	}
 
 	public function deleteImage(int $id): void
