@@ -46,6 +46,8 @@ $v = new class extends Component {
         @auth
             <x-menu-sub title="{{__('Images')}}" icon="o-photo">
                 <x-menu-item title="{{__('Add image')}}" icon="o-plus" link="{{ route('images.create') }}" />
+                <x-menu-item title="{{__('Manage albums')}}" icon="o-archive-box" link="{{ route('albums.index') }}" />
+                <x-menu-item title="{{__('Add album')}}" icon="o-plus" link="{{ route('albums.create') }}" />
             </x-menu-sub>
         @endauth
 
@@ -57,5 +59,6 @@ $v = new class extends Component {
             <x-menu-item title="Archives" icon="o-archive-box" link="####" />
         </x-menu-sub>
         <x-menu-item title="Users" icon="o-users" link="users" />
+        <x-menu-item title="Albums" icon="o-book-open" link="/albums" />
     </x-menu>
 </div>

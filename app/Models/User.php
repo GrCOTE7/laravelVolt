@@ -43,6 +43,11 @@ class User extends Authenticatable
 		return $this->hasMany(Image::class);
 	}
 
+	public function albums()
+	{
+		return $this->hasMany(Album::class);
+	}
+
 	/**
 	 * Get the attributes that should be cast.
 	 *

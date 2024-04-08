@@ -241,8 +241,14 @@
     "Categories": "Catégories",
     "Edit photo": "Modifier cette photo",
     "Manage Photo": "Modification de la photo",
-    "Photo changed with success.":"La photo a bien été modifiée",
+    "Photo changed with success.": "La photo a bien été modifiée",
     "Delete this photo": "Supprimer cette photo",
     "Are you sure to delete this photo?": "Voulez-vous supprimer cette photo ?",
-    "Photo deleted with success.": "La photo a bien été supprimée"
+    "Photo deleted with success.": "La photo a bien été supprimée",
+    "Create a new album": "Créer un nouvel album",
+    "Album created with success.": "L'album a bien été créé",
+    "Add album": "Ajouter un album",
+    "Are you sure to delete this album?": "Voulez-vous vraiment supprimer cet album ?",
+    "Manage albums": "Gestion des albums",
+    "Album updated with success.": "L'album a bien été modifié"
 }
