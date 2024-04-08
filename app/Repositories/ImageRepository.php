@@ -7,8 +7,9 @@
 namespace App\Repositories;
 
 use App\Models\Image;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ImageRepository
 {
@@ -44,5 +45,5 @@ class ImageRepository
         ]);
         $image->delete();
     }
-    
+
 }
