@@ -34,4 +34,15 @@ class ImageRepository
 
 		return $query->paginate($user->pagination ?? config('app.pagination'));
 	}
+
+    public function deleteImage(int $id): void
+    {
+        $image = Image::find($id);
+        Storage::disk('public')->delete ([
+            'images/' . $image->name,
+            'thumbs/' . $image->name,
+        ]);
+        $image->delete();
+    }
+    
 }

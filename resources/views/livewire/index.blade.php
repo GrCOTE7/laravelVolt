@@ -1,11 +1,15 @@
 <?php
 
-use Livewire\Volt\Component;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Mary\Traits\Toast;
 use App\Models\Category;
+use Livewire\Volt\Component;
 use App\Repositories\ImageRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 $v = new class extends Component {
+
+    use Toast;
+
     public string $category;
     public string $param;
 
@@ -26,6 +30,12 @@ $v = new class extends Component {
     {
         redirect()->route('home', ['category' => $this->category, 'param' => $id]);
     }
+
+    public function deleteImage(ImageRepository $imageRepository, int $id): void
+{
+    $imageRepository->deleteImage($id);
+    $this->success(__('Photo deleted with success.'), redirectTo: '/');
+}
 
     public function with(): array
     {
@@ -48,9 +58,21 @@ $v = new class extends Component {
                             {{ $image->user->name }}</p>
                         <p class="text-right"><em>{{ $image->created_at->isoFormat('LLLL') }}</em></p>
                     </div>
+
+                    @adminOrOwner($image->user_id)
+                        <div class="flex justify-between mt-2">
+                            <x-button wire:click="deleteImage({{ $image->id }})" icon="o-fire"
+                                class="btn-circle btn-ghost text-left"
+                                wire:confirm="{{ __('Are you sure to delete this photo?') }}"
+                                tooltip="{{ __('Delete this photo') }}" />
+                            <x-button wire:click="editImage({{ $image->id }})" icon="o-cog"
+                                class="btn-circle btn-ghost text-right" tooltip="{{ __('Edit photo') }}" />
+                        </div>
+                    @endadminOrOwner
+
                     <x-slot:figure>
                         <a href="{{ asset('storage/images/' . $image->name) }}">
-                            <img src="{{ asset('storage/thumbs/' . $image->name) }}" alt="Galerie"/>
+                            <img src="{{ asset('storage/thumbs/' . $image->name) }}" alt="Galerie" />
                         </a>
                     </x-slot:figure>
                 </x-card>
