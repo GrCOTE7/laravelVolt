@@ -21,7 +21,7 @@ return new class() extends Migration {
 			$table->string('password');
 			$table->boolean('admin')->default(false);
 			$table->boolean('adult')->default(false);
-			$table->tinyInteger('pagination')->default(8);
+			$table->tinyInteger('pagination')->default(8)->nullable();
 			$table->rememberToken();
 			$table->timestamps();
 		});
