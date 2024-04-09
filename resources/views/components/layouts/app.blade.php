@@ -43,10 +43,12 @@
 
         </x-slot:sidebar>
 
+
         {{-- The `$slot` goes here --}}
         <x-slot:content>
             <div class="font-extrabold flex mb-4 justify-center items-center text-4xl"><a href="/">Albums</a>
             </div>
+            <x-partials.nav2 />
             {{ $slot }}
         </x-slot:content>
     </x-main>

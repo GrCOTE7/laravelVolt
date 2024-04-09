@@ -87,7 +87,6 @@ $v = new class extends Component {
 }; ?>
 
 <div>
-    <x-partials.nav2 />
     <div class="relative items-center grid w-full px-5 py-5 mx-auto md:px-12 max-w-7xl">
 
         <x-modal wire:model="imageModal" title="{{ __('Manage Photo') }}" separator>

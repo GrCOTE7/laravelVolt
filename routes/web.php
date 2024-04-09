@@ -5,6 +5,7 @@
  */
 
 use App\Http\Middleware\Admin;
+use App\Livewire\MonComposant;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -36,5 +37,7 @@ Route::middleware(Admin::class)->group(function () {
 	Volt::route('categories/create', 'categories.create')->name('categories.create');
 	Volt::route('categories/{category}/edit', 'categories.edit')->name('categories.edit');
 });
+
+Route::get('composant', MonComposant::class);
 
 Volt::route('/{category}/{param?}', 'index')->name('home');
