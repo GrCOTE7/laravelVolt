@@ -258,5 +258,10 @@
     "Delete account": "Supprimer le compte",
     "Are you sure to delete your account?": "Voulez-vous vraiment supprimer votre compte ?",
     "Account deleted with success.": "Le compte a bien été supprimé",
-    "Between 3 and 20": "Entre 3 et 20"
+    "Between 3 and 20": "Entre 3 et 20",
+    "Create a new category": "Créer une nouvelle catégorie",
+    "Category created with success.": "La catégorie a bien été ajoutée",
+    "Are you sure to delete this category?": "Voulez-vous vraiment supprimer cette catégorie ?",
+    "Images count": "Nombre d'images",
+    "Category updated with success.": "La catégorie a bien été modifiée"
 }
