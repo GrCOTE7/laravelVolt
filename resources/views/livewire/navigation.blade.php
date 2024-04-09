@@ -32,6 +32,7 @@ $v = new class extends Component {
                         tooltip-left="{{ __('Logout') }}" no-wire-navigate />
                 </x-slot:actions>
             </x-list-item>
+            <x-menu-item title="{{__('Profile')}}" icon="o-user" link="{{ route('profile') }}" />
             <x-menu-separator />
         @else
             <x-menu-item title="{{ __('Login') }}" icon="o-user" link="{{ route('login') }}" />

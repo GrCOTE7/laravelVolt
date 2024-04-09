@@ -250,5 +250,13 @@
     "Add album": "Ajouter un album",
     "Are you sure to delete this album?": "Voulez-vous vraiment supprimer cet album ?",
     "Manage albums": "Gestion des albums",
-    "Album updated with success.": "L'album a bien été modifié"
+    "Album updated with success.": "L'album a bien été modifié",
+    "Profile": "Profil",
+    "I am an adult": "Je suis un adulte",
+    "Profile updated with success.": "Le profil a bien été modifié",
+    "Update profile": "Modifier le profil",
+    "Delete account": "Supprimer le compte",
+    "Are you sure to delete your account?": "Voulez-vous vraiment supprimer votre compte ?",
+    "Account deleted with success.": "Le compte a bien été supprimé",
+    "Between 3 and 20": "Entre 3 et 20"
 }

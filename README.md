@@ -1,4 +1,9 @@
-//2do: https://mary-ui.com/bootcamp/01
+//2do: doc livewire
+
+https://livewire.laravel.com/docs/quickstart
+
+//2do: doc mary-ui
+https://mary-ui.com/bootcamp/01
 
 ---
 
