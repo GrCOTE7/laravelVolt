@@ -23,6 +23,7 @@ class MonComposant extends Component
 	public $NameAndNote;
 
 	public $note = 0;
+    public $multiple = 1;
 
 	public function __construct()
 	{
@@ -30,10 +31,10 @@ class MonComposant extends Component
 		$this->note   = $this->getUserProperty()->note;
 	}
 
-	public function noter()
+	public function noter($multiple)
 	{
 		$user       = User::find($this->index);
-		$user->note = $this->note;
+		$user->note = $this->note * $multiple;
 		$user->save();
 	}
 
