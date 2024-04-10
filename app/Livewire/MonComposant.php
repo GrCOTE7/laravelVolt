@@ -20,14 +20,29 @@ class MonComposant extends Component
 
 	public $maxUid;
 
+	public $NameAndNote;
+
+	public $note = 0;
+
 	public function __construct()
 	{
 		$this->maxUid = DB::table('users')->max('id');
+		$this->note   = $this->getUserProperty()->note;
+	}
+
+	public function noter()
+	{
+		$user       = User::find($this->index);
+		$user->note = $this->note;
+		$user->save();
 	}
 
 	public function getUserProperty()
 	{
-		return User::find($this->index);
+		$u          = User::find($this->index);
+		$this->note = $u->note ?? 'Pas de note';
+
+		return $u;
 	}
 
 	public function render()

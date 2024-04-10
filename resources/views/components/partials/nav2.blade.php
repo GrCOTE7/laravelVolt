@@ -2,7 +2,7 @@
     $routes = [
         '/' => 'home',
         '/myIndex' => 'myIndex',
-        '/composant' => 'SimpleComponent',
+        '/composant' => 'component',
         '/users' => 'users',
     ];
     $currentRoute = Route::currentRouteName();
