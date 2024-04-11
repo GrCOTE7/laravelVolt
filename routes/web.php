@@ -10,11 +10,6 @@ use App\Livewire\ShowUser;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Volt::route('/myIndex', 'my_index')->name('myIndex');
-
-Route::get('/user/{user}', ShowUser::class);
-Volt::route('/users', 'users.index')->name('users');
-
 Route::middleware('guest')->group(function () {
 	Volt::route('/register', 'auth.register');
 	Volt::route('/login', 'auth.login')->name('login');
@@ -36,11 +31,15 @@ Route::get('/', function () {
 });
 
 Route::middleware(Admin::class)->group(function () {
+    Route::get('/user/{user}', ShowUser::class)->name('user');
+	Volt::route('/users', 'users.index')->name('users');
 	Volt::route('categories', 'categories.index')->name('categories.index');
 	Volt::route('categories/create', 'categories.create')->name('categories.create');
 	Volt::route('categories/{category}/edit', 'categories.edit')->name('categories.edit');
+    Volt::route('/myIndex', 'my_index')->name('myIndex');
+    Route::get('composant', MonComposant::class)->name('composant');
 });
 
-Route::get('composant', MonComposant::class);
 
+// Route::pattern('category', '(?!users|user|categories\/create)[A-Za-z0-9]+');
 Volt::route('/{category}/{param?}', 'index')->name('home');

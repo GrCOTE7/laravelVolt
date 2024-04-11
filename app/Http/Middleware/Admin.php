@@ -20,7 +20,9 @@ class Admin
 	{
 		$user = $request->user();
 		if (!$user || !$user->admin) {
-			redirect('home');
+			$request->session()->flash('error', 'Vous ne pouvez pas accéder à cette page !');
+
+			return redirect(route('home',['category'=>'all']));
 		}
 
 		return $next($request);

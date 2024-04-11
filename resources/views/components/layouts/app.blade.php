@@ -45,6 +45,13 @@
 
         {{-- The `$slot` goes here --}}
         <x-slot:content>
+
+            @if (session('error'))
+                <div class="bg-red-500 text-white p-3 rounded border border-red-600 text-center">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="font-extrabold flex mb-4 justify-center items-center text-4xl"><a href="/">Albums</a>
             </div>
             <x-partials.nav2 />
@@ -56,16 +63,16 @@
     <x-toast />
     <toast>
 
-    <script>
-        // On vérifie si lightbox existe déjà
-        if (typeof lightbox === 'undefined') {
-            // S'il n'existe pas, on le crée
-            const lightbox = new SimpleLightbox('.gallery a', {});
-        } else {
-            // S'il existe déjà, on met à jour ses propriétés
-            lightbox.refresh();
-        }
-    </script>
+        <script>
+            // On vérifie si lightbox existe déjà
+            if (typeof lightbox === 'undefined') {
+                // S'il n'existe pas, on le crée
+                const lightbox = new SimpleLightbox('.gallery a', {});
+            } else {
+                // S'il existe déjà, on met à jour ses propriétés
+                lightbox.refresh();
+            }
+        </script>
 </body>
 
 </html>

@@ -2,8 +2,9 @@
     $routes = [
         '/' => 'home',
         '/myIndex' => 'myIndex',
-        '/composant' => 'component',
-        '/user/1' => 'User 1',
+        '/composant' => 'composant',
+        '/user/1' => 'user',
+        '/users' => 'users',
     ];
     $currentRoute = Route::currentRouteName();
     $lks = [];
@@ -15,8 +16,12 @@
         }
     }
 @endphp
-
-{!! implode(' | ', $lks) !!}
-
-<br><br>
-<hr><br>
+@admin
+    {!! implode(' | ', $lks) !!}
+    <br><br>
+    <hr><br>
+{{-- @else
+    @foreach ($lks as $lk)
+        <i>{!! $lk !!}</i>
+    @endforeach --}}
+@endadmin

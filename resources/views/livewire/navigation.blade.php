@@ -33,14 +33,14 @@ $v = new class extends Component {
                 </x-slot:actions>
             </x-list-item>
             <x-menu-item title="{{ __('Profile') }}" icon="o-user" link="{{ route('profile') }}" />
-                            @admin
-                    <x-menu-sub title="{{ __('Administration') }}" icon="o-cog-6-tooth">
-                        <x-menu-item title="{{ __('Manage categories') }}" icon="o-tag"
-                            link="{{ route('categories.index') }}" />
-                        <x-menu-item title="{{ __('Add a category') }}" icon="o-plus-circle"
-                            link="{{ route('categories.create') }}" />
-                    </x-menu-sub>
-                @endadmin
+            @admin
+                <x-menu-sub title="{{ __('Administration') }}" icon="o-cog-6-tooth">
+                    <x-menu-item title="{{ __('Manage categories') }}" icon="o-tag"
+                        link="{{ route('categories.index') }}" />
+                    <x-menu-item title="{{ __('Add a category') }}" icon="o-plus-circle"
+                        link="{{ route('categories.create') }}" />
+                </x-menu-sub>
+            @endadmin
             <x-menu-separator />
         @else
             <x-menu-item title="{{ __('Login') }}" icon="o-user" link="{{ route('login') }}" />
@@ -76,7 +76,9 @@ $v = new class extends Component {
             <x-menu-item title="Wifi" icon="o-wifi" link="####" />
             <x-menu-item title="Archives" icon="o-archive-box" link="####" />
         </x-menu-sub>
-        <x-menu-item title="Users" icon="o-users" link="/users" />
+        @admin
+            <x-menu-item title="Users" icon="o-users" link="/users" />
+        @endadmin
         <x-menu-item title="Albums" icon="o-book-open" link="/albums" />
     </x-menu>
 </div>
