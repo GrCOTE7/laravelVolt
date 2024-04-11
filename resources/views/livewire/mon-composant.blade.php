@@ -7,11 +7,11 @@
 
         @if ($this->user?->note)
             <div class="flex justify-between">
-                <label>Note:</label>
+                <span>Note:</span>
                 <x-input wire:model.defer="note" type="text"  class="w-1/2 ml-2"/>
-                <label>Coeff.:</label>
-                    <x-input wire:model.live="multiple" type="text"  class="w-1/2 ml-2"/>
-                    <button class="btn btn-primary" wire:click="noter({{ $multiple }})">
+                <span>Coeff.:</span>
+                    <x-input wire:model.live="multiplier" type="text"  class="w-1/2 ml-2"/>
+                    <button class="btn btn-primary" wire:click="noter({{ $multiplier }})">
                         Noter
                     </button>
             </div>

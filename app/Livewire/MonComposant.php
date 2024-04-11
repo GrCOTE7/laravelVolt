@@ -23,7 +23,18 @@ class MonComposant extends Component
 	public $NameAndNote;
 
 	public $note = 0;
-    public $multiple = 1;
+
+	public $multiplier = 1;
+
+	protected $rules = [
+		'note'       => 'required|integer|between:0,20',
+		'multiplier' => 'required|integer|between:1,4',
+	];
+
+	protected $messages = [
+		'note.integer'       => 'C\'est quand même mieux un nombre pour une note !',
+		'multiplier.integer' => 'C\'est quand même mieux un nombre pour un coefficient !',
+	];
 
 	public function __construct()
 	{
@@ -31,10 +42,11 @@ class MonComposant extends Component
 		$this->note   = $this->getUserProperty()->note;
 	}
 
-	public function noter($multiple)
+	public function noter($multiplier)
 	{
+		$this->validate();
 		$user       = User::find($this->index);
-		$user->note = $this->note * $multiple;
+		$user->note = $this->note * $multiplier;
 		$user->save();
 	}
 
