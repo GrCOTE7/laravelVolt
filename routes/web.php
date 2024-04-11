@@ -6,10 +6,13 @@
 
 use App\Http\Middleware\Admin;
 use App\Livewire\MonComposant;
+use App\Livewire\ShowUser;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Volt::route('/myIndex', 'my_index')->name('myIndex');
+
+Route::get('/user/{user}', ShowUser::class);
 Volt::route('/users', 'users.index')->name('users');
 
 Route::middleware('guest')->group(function () {

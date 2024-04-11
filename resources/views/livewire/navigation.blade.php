@@ -76,7 +76,7 @@ $v = new class extends Component {
             <x-menu-item title="Wifi" icon="o-wifi" link="####" />
             <x-menu-item title="Archives" icon="o-archive-box" link="####" />
         </x-menu-sub>
-        <x-menu-item title="Users" icon="o-users" link="users" />
+        <x-menu-item title="Users" icon="o-users" link="/users" />
         <x-menu-item title="Albums" icon="o-book-open" link="/albums" />
     </x-menu>
 </div>

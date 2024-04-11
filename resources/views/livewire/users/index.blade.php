@@ -30,7 +30,13 @@ $v = new class extends Component {
     // Table headers
     public function headers(): array
     {
-        return [['key' => 'id', 'label' => '#', 'class' => 'w-1'], ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'], ['key' => 'admin', 'label' => 'Admin', 'class' => 'w-20'], ['key' => 'email', 'label' => 'E-mail', 'sortable' => false]];
+        return [
+            ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
+            ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'],
+            ['key' => 'note', 'label' => 'Note', 'class' => 'w-20 text-right'],
+            ['key' => 'admin', 'label' => 'Admin', 'class' => 'w-20'],
+            ['key' => 'email', 'label' => 'E-mail', 'sortable' => false]
+            ];
     }
 
     public function users(): Collection
@@ -49,8 +55,9 @@ $v = new class extends Component {
             return [
                 'id' => $user['id'],
                 'name' => $user['name'],
-                'email' => $user['email'],
+                'note' => $user['note'],
                 'admin' => $user['admin'],
+                'email' => $user['email'],
             ];
         });
         return $transformedData

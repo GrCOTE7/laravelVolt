@@ -3,7 +3,7 @@
         '/' => 'home',
         '/myIndex' => 'myIndex',
         '/composant' => 'component',
-        '/users' => 'users',
+        '/user/1' => 'User 1',
     ];
     $currentRoute = Route::currentRouteName();
     $lks = [];
