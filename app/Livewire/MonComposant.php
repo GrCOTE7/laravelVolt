@@ -7,9 +7,9 @@
 namespace App\Livewire;
 
 use App\Models\User;
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Livewire\Component;
 
 class MonComposant extends Component
 {
@@ -53,7 +53,11 @@ class MonComposant extends Component
 
 	public function getUserProperty()
 	{
-		$u          = User::find(Request::instance()->route('user')->id);
+		if (Request::instance()->route('user')?->id) {
+			$u = User::find(Request::instance()->route('user')?->id);
+		} else {
+			$u = User::find($this->index);
+		}
 		$this->note = $u->note ?? 'Pas de note';
 
 		return $u;
