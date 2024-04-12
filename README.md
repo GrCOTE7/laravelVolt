@@ -3,7 +3,7 @@ Référence de base:
 # https://laravel.sillo.org/laravel-11/
 
 
-//2do: doc livewire
+// Doc livewire
 
 https://livewire.laravel.com/docs/quickstart
 

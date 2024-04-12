@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html data-theme="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+@php
+    $urls = ['counter'];
+    $uri = substr(request()->getRequestUri(), 1);
+    $title = in_array($uri, $urls) ? ucfirst($uri) : 'Albums';
+@endphp
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
@@ -52,7 +58,8 @@
                 </div>
             @endif
 
-            <div class="font-extrabold flex mb-4 justify-center items-center text-4xl"><a href="/">Albums</a>
+            <div class="font-extrabold flex mb-4 justify-center items-center text-4xl"><a
+                    href="/">{{ strtoupper($title) }}</a>
             </div>
             <x-partials.nav2 />
             {{ $slot }}

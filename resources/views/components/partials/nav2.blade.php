@@ -20,8 +20,10 @@
     {!! implode(' | ', $lks) !!}
     <br><br>
     <hr><br>
-{{-- @else
-    @foreach ($lks as $lk)
+@else
+    {{-- @foreach ($lks as $lk)
         <i>{!! $lk !!}</i>
     @endforeach --}}
+    <a href="/counter">Counter</a>
+    <br><hr><br>
 @endadmin
