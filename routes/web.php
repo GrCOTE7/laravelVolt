@@ -5,6 +5,7 @@
  */
 
 use Livewire\Volt\Volt;
+use App\Livewire\Counter2;
 use App\Livewire\ShowUser;
 use App\Http\Middleware\Admin;
 use App\Livewire\MonComposant;
@@ -40,7 +41,8 @@ Route::middleware(Admin::class)->group(function () {
     Route::get('composant', MonComposant::class)->name('composant');
 });
 
-Volt::route('/counter', 'divers/counter')->name('counter');
+Volt::route('/counter1', 'divers/counter1')->name('counter1');
+Volt::route('/counter2', Counter2::class)->name('counter2');
 
 // Route::pattern('category', '(?!users|user|categories\/create)[A-Za-z0-9]+');
 Volt::route('/{category}/{param?}', 'index')->name('home');

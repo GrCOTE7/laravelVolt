@@ -24,6 +24,9 @@
     {{-- @foreach ($lks as $lk)
         <i>{!! $lk !!}</i>
     @endforeach --}}
-    <a href="/counter">Counter</a>
-    <br><hr><br>
+    <a href="/counter1">Counter1</a> |
+    <a href="/counter2">Counter2</a> |
+    <a href="/#">Next</a>
+    <br>
+    <hr><br>
 @endadmin
