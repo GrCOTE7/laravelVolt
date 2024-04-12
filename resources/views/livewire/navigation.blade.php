@@ -39,6 +39,7 @@ $v = new class extends Component {
                         link="{{ route('categories.index') }}" />
                     <x-menu-item title="{{ __('Add a category') }}" icon="o-plus-circle"
                         link="{{ route('categories.create') }}" />
+                    <x-menu-item title="{{ __('Manage users') }}" icon="o-user" link="{{ route('users') }}" />
                 </x-menu-sub>
             @endadmin
             <x-menu-separator />

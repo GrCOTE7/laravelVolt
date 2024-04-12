@@ -1,71 +1,59 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Support\Collection;
-use Livewire\Volt\Component;
 use Mary\Traits\Toast;
+use Livewire\Volt\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 $v = new class extends Component {
-    use Toast;
+    use Toast, WithPagination;
 
     public string $search = '';
-
     public bool $drawer = false;
-
     public array $sortBy = ['column' => 'name', 'direction' => 'asc'];
 
-    // Clear filters
     public function clear(): void
     {
         $this->reset();
-        $this->success('Filters cleared.', position: 'toast-bottom');
+        $this->resetPage();
+        $this->success(__('Filters cleared.'), position: 'toast-bottom');
     }
 
-    // Delete action
-    public function delete($id): void
+    public function delete(User $user): void
     {
-        $this->warning("Will delete #$id", 'It is fake.', position: 'toast-bottom');
+        $user->delete();
+        $this->warning("$user->name ".__('deleted'), __('Good bye')."!", position: 'toast-bottom');
     }
 
-    // Table headers
     public function headers(): array
     {
         return [
-            ['key' => 'id', 'label' => '#', 'class' => 'w-1'],
-            ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'],
-            ['key' => 'note', 'label' => 'Note', 'class' => 'w-20 text-right'],
+            ['key' => 'id', 'label' => '#', 'class' => 'w-1'], ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'],
             ['key' => 'admin', 'label' => 'Admin', 'class' => 'w-20'],
+            ['key' => 'adult', 'label' => __('Adult')],
+            ['key' => 'images_count', 'label' => __('Images count')],
+            ['key' => 'note', 'label' => 'Note', 'class' => 'w-20 text-right'],
+            ['key' => 'created_at', 'label' => __('Registration')],
             ['key' => 'email', 'label' => 'E-mail', 'sortable' => false]
-            ];
+        ];
     }
 
-    public function users(): Collection
+    public function users(): LengthAwarePaginator
     {
-        // $users = collect(
-        // [['id' => 1, 'name' => 'Mary', 'email' => 'mary@mary-ui.com', 'age' => 23], ['id' => 2, 'name' => 'Giovanna', 'email' => 'giovanna@mary-ui.com', 'age' => 7], ['id' => 3, 'name' => 'Marina', 'email' => 'marina@mary-ui.com', 'age' => 5]]
-        // )
-        //     ->sortBy([[...array_values($this->sortBy)]])
-        //     ->when($this->search, function (Collection $collection) {
-        //         return $collection->filter(fn(array $item) => str($item['name'])->contains($this->search, true));
-        //     });
-
-        //2do find better soluce for dynamic search
-        $transformedData = User::all()
-        ->map(function ($user) {
-            return [
-                'id' => $user['id'],
-                'name' => $user['name'],
-                'note' => $user['note'],
-                'admin' => $user['admin'],
-                'email' => $user['email'],
-            ];
-        });
-        return $transformedData
-        ->when($this->search, function (Collection $collection) {
-            return $collection->filter(fn(array $item) => str($item['name'])->contains($this->search, true));
-        })
-        ->sortBy([[...array_values($this->sortBy)]]);
-
+        return User::query()
+        ->withCount('images')
+        ->when($this->search, fn(Builder $q) => $q->where('name', 'like', "%$this->search%"))
+        ->orderBy(...array_values($this->sortBy))
+        ->paginate(5);
+    }
+    public function updated($property): void
+    {
+        if (! is_array($property) && $property != "") {
+            $this->resetPage();
+        }
     }
 
     public function with(): array
@@ -79,9 +67,9 @@ $v = new class extends Component {
 
 <div>
     <!-- HEADER -->
-    <x-header title="Hello" separator progress-indicator>
+    <x-header title="{{__('Users')}}" separator progress-indicator>
         <x-slot:middle class="!justify-end">
-            <x-input placeholder="Search..." wire:model.live.debounce="search" clearable icon="o-magnifying-glass" />
+           <x-input placeholder="{{__('Search...')}}" wire:model.live.debounce="search" clearable icon="o-magnifying-glass" />
         </x-slot:middle>
         <x-slot:actions>
             <x-button label="Filters" @click="$wire.drawer = true" responsive icon="o-funnel" />
@@ -90,9 +78,26 @@ $v = new class extends Component {
 
     <!-- TABLE  -->
     <x-card>
-        <x-table :headers="$headers" :rows="$users" :sort-by="$sortBy">
+        <x-table :headers="$headers" :rows="$users" :sort-by="$sortBy" with-pagination>
+
+           @scope('cell_admin', $user)
+                @if($user->admin)
+                    <x-icon name="o-check-circle"  />
+                @endif
+            @endscope
+
+           @scope('cell_adult', $user)
+                @if($user->adult)
+                    <x-icon name="o-check-circle"  />
+                @endif
+            @endscope
+
+           @scope('cell_created_at', $user)
+                {{ $user->created_at->isoFormat('L') }}
+            @endscope
+
             @scope('actions', $user)
-                <x-button icon="o-trash" wire:click="delete({{ $user['id'] }})" wire:confirm="Are you sure?" spinner
+                <x-button icon="o-trash" wire:click="delete({{ $user['id'] }})" wire:confirm="{{__('Are you sure to delete this user?')}}" confirm-text="Are you sure?" spinner
                     class="btn-ghost btn-sm text-red-500" />
             @endscope
         </x-table>
