@@ -23,5 +23,4 @@ $v = new class extends Component {
     }
 }; ?>
 
-
 <x-partials.counterbox :num=1 :version="$version" :count="$count" />
