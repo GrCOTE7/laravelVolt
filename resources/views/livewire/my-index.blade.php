@@ -7,9 +7,10 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 $v = new #[Title('Home')]
-    class extends Component {
+class extends Component {
     #[Rule('required|exists:users,id')]
     public $index = 1;
+    public $nolist = 0;
 
     public function maxUid()
     {
@@ -35,7 +36,7 @@ $v = new #[Title('Home')]
     // Table headers
     public function headers(): array
     {
-        return [['key' => 'id', 'label' => '#', 'class' => 'w-1'], ['key' => 'name', 'label' => 'Name', 'class' => 'w-64'], ['key' => 'admin', 'label' => 'Admin', 'class' => 'w-20'], ['key' => 'email', 'label' => 'E-mail', 'sortable' => false]];
+        return [['key' => 'id', 'label' => '#', 'class' => 'w-1'], ['key' => 'name', 'label' => __('Name'), 'class' => 'w-64'], ['key' => 'admin', 'label' => __('Admin'), 'class' => 'w-20 text-center'], ['key' => 'email', 'label' => 'E-mail', 'sortable' => false]];
     }
     public function users(): Collection
     {
@@ -48,6 +49,7 @@ $v = new #[Title('Home')]
             'maxUid' => $this->maxUid(),
             'users' => $this->users(),
             'headers' => $this->headers(),
+            'nolist' => $this->nolist,
         ];
     }
 }; ?>
@@ -62,11 +64,26 @@ $v = new #[Title('Home')]
     <div>Taper l'Id d'un utilisateur ci-dessous (1-{{ $maxUid }}):</div>
     <x-input wire:model.live="index" type="test" />
 
-    <p class="bg-yellow-100 text-black px-2 mt-2 mb-3 rounded">
-        {{ $this->user?->name ?? 'Personne avec cet Id !' }}
-    </p>
+    <p class="bg-yellow-100 text-black px-2 mt-2 mb-3 rounded-lg">
 
-    <x-card>
-        <x-table :headers="$headers" :rows="$users" />
-    </x-card>
+        @if ($this->user?->name)
+            Nom: <b>{{ $this->user?->name }}</b><br>
+            Email: <b>{{ $this->user?->email }}</b><br>
+            Note: <b>{{ $this->user?->note }}</b>
+        @else
+            Personne avec cet Id !
+        @endif
+
+    </p>
+    @if (!$nolist)
+        <x-card>
+            <x-table :headers="$headers" :rows="$users">
+                @scope('cell_admin', $user)
+                    @if ($user->admin)
+                        <x-icon name="o-check-circle" />
+                    @endif
+                @endscope
+            </x-table>
+        </x-card>
+    @endif
 </div>

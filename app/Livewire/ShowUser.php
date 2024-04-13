@@ -7,14 +7,16 @@
 namespace App\Livewire;
 
 use App\Models\User;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class ShowUser extends Component
 {
 	public User $user;
 
+	#[Title('User')]
 	public function render()
 	{
-		return view('livewire.show-user')->layout('components.layouts.app');
+		return view('livewire.show-user')->layout('components.layouts.posts');
 	}
 }

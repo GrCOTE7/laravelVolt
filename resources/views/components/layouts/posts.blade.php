@@ -4,22 +4,17 @@
 @php
     $urls = ['posts/create', 'counter1', 'counter2', 'counters'];
     $uri = substr(request()->getRequestUri(), 1);
-    // $title = in_array($uri, $urls) ? ucfirst($uri) : 'Albums';
+    config(['app.name' => 'Posts']);
 @endphp
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>v2 - {{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
+    <title>{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- <link rel="stylesheet" href="assets/app-Dah4FSc-.css">
-    <script src="assets/app-D2jpX1vH.js"></script> --}}
-
-    <script src=" https://cdn.jsdelivr.net/npm/simplelightbox@2.14.2/dist/simple-lightbox.min.js "></script>
-    <link href=" https://cdn.jsdelivr.net/npm/simplelightbox@2.14.2/dist/simple-lightbox.min.css " rel="stylesheet">
 </head>
 
 <body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">

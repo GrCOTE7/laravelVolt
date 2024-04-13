@@ -38,7 +38,7 @@ Route::middleware(Admin::class)->group(function () {
 	Volt::route('categories', 'categories.index')->name('categories.index');
 	Volt::route('categories/create', 'categories.create')->name('categories.create');
 	Volt::route('categories/{category}/edit', 'categories.edit')->name('categories.edit');
-	Volt::route('/myIndex', 'my_index')->name('myIndex');
+	Volt::route('/myIndex', 'my-index')->name('myIndex');
 	Route::get('composant', MonComposant::class)->name('composant');
 });
 
