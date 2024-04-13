@@ -3,7 +3,7 @@
 @endphp
 <div class="prose">
 
-    <h2>Title: "{{ $title }}"</h2>
+    {{-- <h2>Title: "{{ $title }}"</h2> --}}
     <span>Author: <b>{{ $author }}</b></span>
 
     <hr class="my-1">

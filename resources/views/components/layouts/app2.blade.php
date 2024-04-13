@@ -4,7 +4,7 @@
 @php
     $urls = ['posts/create', 'counter1', 'counter2', 'counters'];
     $uri = substr(request()->getRequestUri(), 1);
-    $title = in_array($uri, $urls) ? ucfirst($uri) : 'Albums';
+    // $title = in_array($uri, $urls) ? ucfirst($uri) : 'Albums';
 @endphp
 
 <head>

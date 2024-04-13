@@ -9,11 +9,12 @@ namespace App\Livewire\Posts;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
 #[Layout('components.layouts.app2')]
 class CreatePost extends Component
 {
-	public $title = 'Post title...';
+	// public $title = 'Post title...';
 
 	public function fakePosts()
 	{
@@ -47,7 +48,9 @@ class CreatePost extends Component
 
 	// Optional render if well named component
 	// #[Layout('components.layouts.app2')]
-	public function render()
+
+    #[Title('Ttt')]
+    public function render()
 	{
 		return view('livewire.posts.create-post')->with([
 			// 'author' => ucfirst(Auth::user()?->name),
