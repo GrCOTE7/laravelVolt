@@ -24,6 +24,7 @@
     {{-- @foreach ($lks as $lk)
         <i>{!! $lk !!}</i>
     @endforeach --}}
+    <a href="/posts/create" title="Livewire component">Posts</a> |
     <a href="/counter1" title="Volt component">Counter1</a> |
     <a href="/counter2" title="Livewire component">Counter2</a> |
     <a href="/#">Next</a>

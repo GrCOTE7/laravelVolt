@@ -9,6 +9,7 @@ use App\Livewire\Counter2;
 use App\Livewire\ShowUser;
 use App\Http\Middleware\Admin;
 use App\Livewire\MonComposant;
+use App\Livewire\Posts\CreatePost;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -32,15 +33,16 @@ Route::get('/', function () {
 });
 
 Route::middleware(Admin::class)->group(function () {
-    Route::get('/user/{user}', ShowUser::class)->name('user');
+	Route::get('/user/{user}', ShowUser::class)->name('user');
 	Volt::route('/users', 'users.index')->name('users');
 	Volt::route('categories', 'categories.index')->name('categories.index');
 	Volt::route('categories/create', 'categories.create')->name('categories.create');
 	Volt::route('categories/{category}/edit', 'categories.edit')->name('categories.edit');
-    Volt::route('/myIndex', 'my_index')->name('myIndex');
-    Route::get('composant', MonComposant::class)->name('composant');
+	Volt::route('/myIndex', 'my_index')->name('myIndex');
+	Route::get('composant', MonComposant::class)->name('composant');
 });
 
+Volt::route('/posts/create', CreatePost::class)->name('posts.create');
 Volt::route('/counter1', 'divers/counter1')->name('counter1');
 Volt::route('/counter2', Counter2::class)->name('counter2');
 

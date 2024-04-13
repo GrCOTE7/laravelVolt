@@ -2,7 +2,7 @@
 <html data-theme="dark" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 @php
-    $urls = ['counter1', 'counter2'];
+    $urls = ['posts/create', 'counter1', 'counter2'];
     $uri = substr(request()->getRequestUri(), 1);
     $title = in_array($uri, $urls) ? ucfirst($uri) : 'Albums';
 @endphp
