@@ -28,7 +28,7 @@
     {{-- <a href="/counter1" title="Volt component">Counter1</a> |
     <a href="/counter2" title="Livewire component">Counter2</a> | --}}
     <a href="/counters" title="Volt & Livewire component">Counters</a> |
-    <a href="/#">Next</a>
+    <a href="/next">Next</a>
     <br>
     <hr><br>
 @endadmin

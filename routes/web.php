@@ -47,7 +47,7 @@ Volt::route('/posts/create', CreatePost::class)->name('posts.create');
 Volt::route('/counter1', 'divers/counter1')->name('counter1');
 Volt::route('/counter2', Counter2::class)->name('counter2');
 Volt::route('/counters', 'divers/counters')->name('counters');
-Volt::route('/next', 'divers/counters')->name('counters');
+Volt::route('/next', 'divers/next')->name('next');
 
 // Route::pattern('category', '(?!users|user|categories\/create)[A-Za-z0-9]+');
 Volt::route('/{category}/{param?}', 'index')->name('home');

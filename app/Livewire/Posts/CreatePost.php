@@ -56,7 +56,7 @@ class CreatePost extends Component
 			'posts'  => $this->fakePosts(),
 		]);
         // ->title('Ooo');
-		// ->layout('components.layouts.app2');
+		// ->layout('components.layouts.posts');
 	}
 	//
 	// Inline render
