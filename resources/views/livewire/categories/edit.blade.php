@@ -34,7 +34,7 @@ $v = new class extends Component {
 <div>
     <x-card class="h-screen flex items-center justify-center" title="{{ __('Update') }} {{ $category->name }}">
         <x-form wire:submit="save">
-            <x-input label="{{ __('Name') }}" name="Name" wire:model="name" />
+            <x-input label="{{ __('Name') }}" name="Name" wire:model.live="name" />
             <x-slot:actions>
                 <x-button label="{{ __('Cancel') }}" link="/categories" />
                 <x-button label="{{ __('Save') }}" icon="o-paper-airplane" spinner="save" type="submit"

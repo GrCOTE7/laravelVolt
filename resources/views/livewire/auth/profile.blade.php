@@ -43,10 +43,10 @@ $v = new class extends Component {
 <div>
     <x-card class="h-screen flex items-center" title="{{ __('Update profile') }}">
         <x-form wire:submit="save">
-            <x-input label="{{ __('E-mail') }}" value="{{ $email }}" wire:model="email" icon="o-envelope" inline />
+            <x-input label="{{ __('E-mail') }}" value="{{ $email }}" wire:model.live="email" icon="o-envelope" inline />
             <x-range wire:model.live.debounce="pagination" label="Pagination ({{ $pagination }})" min="3"
                 max="20" step="1" hint="{{ __('Between 3 and 20') }}" class="range-accent" />
-            <x-checkbox label="{{ __('I am an adult') }}" wire:model="adult" />
+            <x-checkbox label="{{ __('I am an adult') }}" wire:model.live="adult" />
 
             <x-slot:actions>
                 <x-button label="{{ __('Delete account') }}" icon="c-hand-thumb-down"

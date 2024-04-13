@@ -60,9 +60,9 @@ $v = new class extends Component {
     <x-card class="h-screen flex items-center justify-center" title="{{ __('Reset Password') }}" shadow separator>
         <x-session-status class="mb-4" :status="session('status')" />
         <x-form wire:submit="resetPassword">
-            <x-input label="{{ __('E-mail') }}" wire:model="email" icon="o-envelope" inline />
-            <x-input label="{{ __('Password') }}" wire:model="password" type="password" icon="o-key" inline />
-            <x-input label="{{ __('Confirm Password') }}" wire:model="password_confirmation" type="password"
+            <x-input label="{{ __('E-mail') }}" wire:model.live="email" icon="o-envelope" inline />
+            <x-input label="{{ __('Password') }}" wire:model.live="password" type="password" icon="o-key" inline />
+            <x-input label="{{ __('Confirm Password') }}" wire:model.live="password_confirmation" type="password"
                 icon="o-key" inline required autocomplete="new-password" />
             <x-slot:actions>
                 <x-button label="{{ __('Reset Password') }}" type="submit" icon="o-paper-airplane"

@@ -89,16 +89,16 @@ $v = new class extends Component {
 <div>
     <div class="relative items-center grid w-full px-5 py-5 mx-auto md:px-12 max-w-7xl">
 
-        <x-modal wire:model="imageModal" title="{{ __('Manage Photo') }}" separator>
+        <x-modal wire:model.live="imageModal" title="{{ __('Manage Photo') }}" separator>
             <x-form wire:submit="saveImage">
-                <x-input label="{{ __('Description') }}" value="{{ $description }}" wire:model="description"
+                <x-input label="{{ __('Description') }}" value="{{ $description }}" wire:model.live="description"
                     hint="{{ __('Describre your image here') }}" />
-                <x-select label="{{ __('Category') }}" icon="o-tag" :options="$categories" wire:model="category_id"
+                <x-select label="{{ __('Category') }}" icon="o-tag" :options="$categories" wire:model.live="category_id"
                     hint="{{ __('Choose a pertinent category') }}" />
                 @if ($albums)
-                    <x-choices label="{{ __('Albums') }}" wire:model="albums_multi_ids" :options="$albums" />
+                    <x-choices label="{{ __('Albums') }}" wire:model.live="albums_multi_ids" :options="$albums" />
                 @endif
-                <x-checkbox label="{{ __('Adult content') }}" wire:model="adult" />
+                <x-checkbox label="{{ __('Adult content') }}" wire:model.live="adult" />
                 <x-slot:actions>
                     <x-button label="{{ __('Cancel') }}" icon="o-x-mark" class="btn-ghost"
                         @click="$wire.imageModal = false" />

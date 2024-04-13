@@ -32,9 +32,9 @@ class extends Component {
     <x-card class="h-screen flex items-center" title="{{__('Login')}}" shadow separator>
 
         <x-form wire:submit="login">
-            <x-input label="{{__('E-mail')}}" wire:model="email" icon="o-envelope" inline />
-            <x-input label="{{__('Password')}}" wire:model="password" type="password" icon="o-key" inline />
-            <x-checkbox label="{{ __('Remember me') }}" wire:model="remember"/>
+            <x-input label="{{__('E-mail')}}" wire:model.live="email" icon="o-envelope" inline />
+            <x-input label="{{__('Password')}}" wire:model.live="password" type="password" icon="o-key" inline />
+            <x-checkbox label="{{ __('Remember me') }}" wire:model.live="remember"/>
 
             <x-slot:actions>
                 <x-button label="{{__('Forgot your password?')}}" class="btn-ghost" link="/forgot-password" />

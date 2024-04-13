@@ -120,7 +120,7 @@ $v = new class extends Component {
     </x-card>
 
     <!-- FILTER DRAWER -->
-    <x-drawer wire:model="drawer" title="Filters" right separator with-close-button class="lg:w-1/3">
+    <x-drawer wire:model.live="drawer" title="Filters" right separator with-close-button class="lg:w-1/3">
         <x-input placeholder="Search..." wire:model.live.debounce="search" icon="o-magnifying-glass"
             @keydown.enter="$wire.drawer = false" />
 

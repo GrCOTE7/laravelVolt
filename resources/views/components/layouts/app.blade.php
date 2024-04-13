@@ -69,7 +69,6 @@
     {{--  TOAST area --}}
     <x-toast />
     <toast>
-
         <script>
             // On vérifie si lightbox existe déjà
             if (typeof lightbox === 'undefined') {
