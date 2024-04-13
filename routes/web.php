@@ -4,13 +4,13 @@
  * (ɔ) GrCOTE7 - 1990-2024
  */
 
-use Livewire\Volt\Volt;
-use App\Livewire\Counter2;
-use App\Livewire\ShowUser;
 use App\Http\Middleware\Admin;
+use App\Livewire\Counter2;
 use App\Livewire\MonComposant;
 use App\Livewire\Posts\CreatePost;
+use App\Livewire\ShowUser;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
 	Volt::route('/register', 'auth.register');
@@ -43,8 +43,11 @@ Route::middleware(Admin::class)->group(function () {
 });
 
 Volt::route('/posts/create', CreatePost::class)->name('posts.create');
+
 Volt::route('/counter1', 'divers/counter1')->name('counter1');
 Volt::route('/counter2', Counter2::class)->name('counter2');
+Volt::route('/counters', 'divers/counters')->name('counters');
+Volt::route('/next', 'divers/counters')->name('counters');
 
 // Route::pattern('category', '(?!users|user|categories\/create)[A-Za-z0-9]+');
 Volt::route('/{category}/{param?}', 'index')->name('home');
