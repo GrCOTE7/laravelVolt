@@ -6,7 +6,8 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-$v = new #[Title('Home')]
+$v = new
+#[Title('Home')]
 class extends Component {
     #[Rule('required|exists:users,id')]
     public $index = 1;

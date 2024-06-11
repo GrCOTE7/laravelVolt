@@ -17,6 +17,6 @@ class ShowUser extends Component
 	#[Title('User')]
 	public function render()
 	{
-		return view('livewire.show-user')->layout('components.layouts.posts');
+		return view('livewire.show-user');
 	}
 }

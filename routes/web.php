@@ -34,6 +34,7 @@ Route::get('/', function () {
 
 Route::middleware(Admin::class)->group(function () {
 	Route::get('/user/{user}', ShowUser::class)->name('user');
+	Volt::route('/userv2/{user}', 'show-userv2')->name('usersv2');
 	Volt::route('/users', 'users.index')->name('users');
 	Volt::route('categories', 'categories.index')->name('categories.index');
 	Volt::route('categories/create', 'categories.create')->name('categories.create');
@@ -46,7 +47,7 @@ Volt::route('/posts/create', CreatePost::class)->name('posts.create');
 
 Volt::route('/counter1', 'divers/counter1')->name('counter1');
 Volt::route('/counter2', Counter2::class)->name('counter2');
-Volt::route('/counters', 'divers/counters')->name('counters');
+Volt::route('/counter3', 'divers/counter3')->name('counters');
 Volt::route('/next', 'divers/next')->name('next');
 
 // Route::pattern('category', '(?!users|user|categories\/create)[A-Za-z0-9]+');

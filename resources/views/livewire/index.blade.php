@@ -8,7 +8,7 @@ use Livewire\Attributes\Rule;
 use App\Repositories\ImageRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-$v = new class extends Component {
+new class extends Component {
     use Toast;
 
     public Image $image;

@@ -17,7 +17,6 @@ $v = new class extends Component {
     public function with()
     {
         return [
-            'count'   => $this->count,
             'version' => 'Volt',
         ];
     }
